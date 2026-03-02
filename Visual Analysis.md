@@ -43,6 +43,8 @@ We must focus on:
 
 F1 Score
 
+![image](https://github.com/ayushie18/Insurance-Fraud-Detection-using-ML/blob/885d395f05905f69eba1114f150c91b914baec6e/Screenshot%202026-03-02%20220307.png)
+
 Precision
 
 Recall
