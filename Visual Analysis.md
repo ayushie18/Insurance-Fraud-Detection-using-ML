@@ -85,3 +85,38 @@ Later in bivariate analysis, we should check:
 sns.countplot(x='incident_severity', hue='fraud_reported', data=df)
 
 ![image](https://github.com/ayushie18/Insurance-Fraud-Detection-using-ML/blob/cec4e2ab070675d26babb7cca49969ed8823bdb5/Screenshot%202026-03-02%20220321.png)
+
+
+🔶 3️⃣ Histogram – Age Distribution
+📌 Code:
+plt.figure(figsize=(8,5))
+plt.hist(df['age'], bins=10, edgecolor='black')
+plt.title("Age Distribution")
+plt.xlabel("Age")
+plt.ylabel("Number of People")
+plt.show()
+📊 Insight from Histogram
+
+From your graph:
+
+Age is almost Normally Distributed
+
+Most claimants are between 30–50 years
+
+Very few claims from:
+
+Below 25
+
+Above 60
+
+🎯 Interpretation:
+
+✔ No extreme skewness
+✔ No strong outliers visible
+✔ Good feature for model training
+
+📌 Summary of Univariate Analysis
+Feature	Insight
+fraud_reported	Imbalanced dataset (24.7% fraud)
+incident_severity	Minor damage most common (35.4%)
+age	Approximately normal distribution
