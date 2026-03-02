@@ -120,3 +120,5 @@ Feature	Insight
 fraud_reported	Imbalanced dataset (24.7% fraud)
 incident_severity	Minor damage most common (35.4%)
 age	Approximately normal distribution
+
+![image](https://github.com/ayushie18/Insurance-Fraud-Detection-using-ML/blob/049309f08597262feb6c6ffad739b07090e1fb47/Screenshot%202026-03-02%20220331.png)
