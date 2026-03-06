@@ -1,4 +1,4 @@
-Insurance Fraud Detection Using Machine Learning
+Insurance Fraud Detection Using Machine Learning 
 Project Documentation
 1. Introduction
 
