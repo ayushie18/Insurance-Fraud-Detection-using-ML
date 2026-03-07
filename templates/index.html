@@ -1,0 +1,106 @@
+<div class="dashboard">
+    <header>
+        <h1>Insurance Fraud Detection System</h1>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        {% if not active_category %}
+        <p>Select the Insurance Category</p>
+        {% endif %}
+    </header>
+
+    <div class="wizard-container">
+        <input type="radio" name="wizard" id="step-home" {% if not active_category %}checked{% endif %}>
+        <input type="radio" name="wizard" id="step-vehicle" {% if active_category == 'vehicle' %}checked{% endif %}>
+        <input type="radio" name="wizard" id="step-health" {% if active_category == 'health' %}checked{% endif %}>
+        <input type="radio" name="wizard" id="step-property" {% if active_category == 'property' %}checked{% endif %}>
+
+        <div class="selection-menu">
+            <label for="step-vehicle" class="menu-card">
+                <div class="icon">🚗</div>
+                <h3>Vehicle</h3>
+                <span>Check Motor Claims</span>
+            </label>
+            <label for="step-health" class="menu-card">
+                <div class="icon">🏥</div>
+                <h3>Health</h3>
+                <span>Check Medical Claims</span>
+            </label>
+            <label for="step-property" class="menu-card">
+                <div class="icon">🏠</div>
+                <h3>Property</h3>
+                <span>Check Asset Claims</span>
+            </label>
+        </div>
+
+        <div class="form-step" id="form-vehicle">
+            <label for="step-home" class="back-btn">← Change Category</label>
+            
+            {% if active_category == 'vehicle' and prediction_text %}
+            <div class="result-card {% if '⚠️' in prediction_text %}fraud{% else %}genuine{% endif %}">
+                <h3>{{ prediction_text }}</h3>
+                <a href="/" class="reset-btn">Reset</a>
+            </div>
+            {% endif %}
+
+            <h3>Vehicle Fraud Analysis</h3>
+            <form action="/predict" method="POST">
+                <input type="hidden" name="category_name" value="vehicle"> 
+                <div class="input-grid">
+                    <div class="field"><label>Vehicle Claim (₹)</label><input type="number" name="vehicle_claim" placeholder="e.g. 50,000"></div>
+                    <div class="field"><label>Auto Year</label><input type="number" name="auto_year" placeholder="YYYY"></div>
+                    <div class="field"><label>Incident Severity (0-2)</label><input type="number" name="incident_severity" placeholder="0=Trivial, 2=Major"></div>
+                    <div class="field"><label>Witnesses</label><input type="number" name="witnesses" placeholder="Count"></div>
+                    <div class="field"><label>Vehicles Involved</label><input type="number" name="number_of_vehicles_involved" placeholder="Count"></div>
+                </div>
+                <button type="submit" class="btn">Predict Fraud</button>
+            </form>
+        </div>
+
+        <div class="form-step" id="form-health">
+            <label for="step-home" class="back-btn">← Change Category</label>
+            
+            {% if active_category == 'health' and prediction_text %}
+            <div class="result-card {% if '⚠️' in prediction_text %}fraud{% else %}genuine{% endif %}">
+                <h3>{{ prediction_text }}</h3>
+                <a href="/" class="reset-btn">Reset</a>
+            </div>
+            {% endif %}
+
+            <h3>Health Fraud Analysis</h3>
+            <form action="/predict" method="POST">
+                <input type="hidden" name="category_name" value="health"> 
+                <div class="input-grid">
+                    <div class="field"><label>Injury Claim (₹)</label><input type="number" name="injury_claim" placeholder="₹ Amount"></div>
+                    <div class="field"><label>Insured Age</label><input type="number" name="age" placeholder="Years"></div>
+                    <div class="field"><label>Bodily Injuries</label><input type="number" name="bodily_injuries" placeholder="Count"></div>
+                    <div class="field"><label>Education Level (0-5)</label><input type="number" name="insured_education_level" placeholder="0=High School, 5=PhD"></div>
+                    <div class="field"><label>Witnesses</label><input type="number" name="witnesses" placeholder="Count"></div>
+                </div>
+                <button type="submit" class="btn">Predict Health Fraud</button>
+            </form>
+        </div>
+
+        <div class="form-step" id="form-property">
+            <label for="step-home" class="back-btn">← Change Category</label>
+            
+            {% if active_category == 'property' and prediction_text %}
+            <div class="result-card {% if '⚠️' in prediction_text %}fraud{% else %}genuine{% endif %}">
+                <h3>{{ prediction_text }}</h3>
+                <a href="/" class="reset-btn">Reset</a>
+            </div>
+            {% endif %}
+
+            <h3>Property Fraud Analysis</h3>
+            <form action="/predict" method="POST">
+                <input type="hidden" name="category_name" value="property"> 
+                <div class="input-grid">
+                    <div class="field"><label>Property Claim (₹)</label><input type="number" name="property_claim" placeholder="₹ Amount"></div>
+                    <div class="field"><label>Annual Premium (₹)</label><input type="number" name="policy_annual_premium" placeholder="₹ Amount"></div>
+                    <div class="field"><label>Policy Deductible (₹)</label><input type="number" name="policy_deductable" placeholder="₹ Amount"></div>
+                    <div class="field"><label>Umbrella Limit (₹)</label><input type="number" name="umbrella_limit" placeholder="₹ Amount"></div>
+                    <div class="field"><label>Months as Customer</label><input type="number" name="months_as_customer" placeholder="Count"></div>
+                </div>
+                <button type="submit" class="btn">Predict Property Fraud</button>
+            </form>
+        </div>
+    </div>
+</div>
